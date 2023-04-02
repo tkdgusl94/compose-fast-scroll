@@ -21,6 +21,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.leveloper.compose.fastscroller.FastScrollableLazyColumn
+import com.leveloper.compose.fastscroller.rememberFastScrollbarState
 import com.leveloper.sample.ui.theme.ComposefastscrollTheme
 
 class MainActivity : ComponentActivity() {
@@ -33,16 +34,15 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    val items = remember { getSampleList() }
                     Sample(
-                        items = items
+                        items = remember { getSampleList() }
                     )
                 }
             }
         }
     }
 
-    private fun getSampleList(): List<String> = List(200) { "${it}st item" }
+    private fun getSampleList(): List<String> = List(20000) { "${it}st item" }
 }
 
 @Composable
@@ -51,6 +51,7 @@ fun Sample(
     modifier: Modifier = Modifier
 ) {
     FastScrollableLazyColumn(
+        state = rememberFastScrollbarState(),
         knobContent = {
             Box(
                 modifier = modifier
